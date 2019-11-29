@@ -35,7 +35,7 @@ public class View extends JFrame {
     View() {
         this.control = new Control();
 
-        home = new JButton("HOME PAGE ");
+        home = new JButton("HOME PAGE ");  // this should change 
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,7 +107,7 @@ public class View extends JFrame {
         f.setJMenuBar(mb);
         f.setSize(700, 600);
         f.setVisible(true);
-        f.addWindowListener(new WindowAdapter() {  // for closing 
+        f.addWindowListener(new WindowAdapter() {  // for closing
 
             public void windowClosing(WindowEvent we) {
                 System.exit(0);
