@@ -28,6 +28,8 @@ public class View extends JFrame {
     JPanel pp = new JPanel();
     JMenuBar mb = new JMenuBar();
     String user_lb;
+    ResultSet rs = null;
+    boolean flag = false;
 
     public void View() {
     }
@@ -109,6 +111,7 @@ public class View extends JFrame {
         f.setVisible(true);
         f.addWindowListener(new WindowAdapter() {  // for closing
 
+            @Override
             public void windowClosing(WindowEvent we) {
                 System.exit(0);
             }
@@ -145,8 +148,6 @@ public class View extends JFrame {
                     DataBase db = new DataBase();
                     Connection con = db.getConnection();
                     PreparedStatement pst = null;
-                    String[] col_name = null;
-                    ResultSet rs = null;
 
                     try {
                         pst = con.prepareStatement(sql);
@@ -161,7 +162,7 @@ public class View extends JFrame {
                     if (rs.next()) {
 
                         user_lb = rs.getString("name") + " " + rs.getString("lastname");
-
+                        flag = true;
                         JOptionPane.showMessageDialog(null,
                                 "Welcome mr " + rs.getString("name")
                                 + " " + rs.getString("lastname")
@@ -177,14 +178,23 @@ public class View extends JFrame {
                     ex.printStackTrace();
 
                 }
-                String[] user = {user_lb, "Profile", "Log Out"};
-                JComboBox cb = new JComboBox(user);
-                mb.add(cb);
+                if (flag == true) {
+                    String user = user_lb;
+                    JButton pf = new JButton(user);
+                    pf.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                new Profile().ProfileP(rs);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+                    mb.add(pf);
+                }
             }
-
-        }
-        );
-
+        });
         l4 = new JLabel("           ");
         p.setLayout(new GridLayout(7, 2));
         p.add(l1);
@@ -220,8 +230,6 @@ public class View extends JFrame {
                     DataBase db = new DataBase();
                     Connection con = db.getConnection();
                     PreparedStatement pst = null;
-                    String[] col_name = null;
-                    ResultSet rs = null;
 
                     try {
                         pst = con.prepareStatement(sql);
@@ -232,10 +240,10 @@ public class View extends JFrame {
                     pst.setString(1, tf1.getText());
                     pst.setString(2, p1.getText());
                     rs = pst.executeQuery();
-                    ResultSetMetaData md = rs.getMetaData();
 
                     if (rs.next()) {
                         user_lb = (" Dr " + rs.getString("name") + " " + rs.getString("lastname"));
+                        flag = true;
                         JOptionPane.showMessageDialog(null, "Welcome mr " + rs.getString("name")
                                 + " " + rs.getString("lastname")
                                 + "\n id " + rs.getString("iddoctor")
@@ -249,11 +257,24 @@ public class View extends JFrame {
                     ex.printStackTrace();
 
                 }
-                String[] user = {user_lb, "Profile", "Log Out"};
-                JComboBox cb = new JComboBox(user);
-                mb.add(cb);
-            }
+                if (flag == true) {
+                    String user = user_lb;
+                    JButton pf = new JButton(user);
+                    pf.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
 
+                            try {
+                                new Profile().ProfileD(rs);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        }
+                    });
+                    mb.add(pf);
+                }
+            }
         });
 
         l4 = new JLabel("           ");
@@ -261,7 +282,6 @@ public class View extends JFrame {
         p.setLayout(new GridLayout(7, 2));
 
         p.add(l1);
-
         p.add(l2);
         p.add(tf1);
         p.add(l3);
