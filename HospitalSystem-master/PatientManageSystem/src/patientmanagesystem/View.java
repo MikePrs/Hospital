@@ -110,14 +110,12 @@ public class View extends JFrame {
         f.setSize(700, 600);
         f.setVisible(true);
         f.addWindowListener(new WindowAdapter() {  // for closing
-
             @Override
             public void windowClosing(WindowEvent we) {
                 System.exit(0);
             }
         }
         );
-
     }
 
     private void HomePage() {
@@ -129,7 +127,6 @@ public class View extends JFrame {
         JTextField tf1, p1;
         JButton btn1;
 
-        //JFrame frame = new JFrame("Login Form");
         l1 = new JLabel("Login Patient Form");
         l1.setForeground(Color.blue);
         l1.setFont(new Font("Serif", Font.BOLD, 20));
@@ -159,13 +156,12 @@ public class View extends JFrame {
                     pst.setString(2, p1.getText());
                     rs = pst.executeQuery();
 
-                    if (rs.next()) {
-
+                    if (rs.next()) {// if credencials are correct wintdow opens 
                         user_lb = rs.getString("name") + " " + rs.getString("lastname");
-                        flag = true;
+                        flag = true;   // flag for the user profile button that apears after login
                         JOptionPane.showMessageDialog(null,
                                 "Welcome mr " + rs.getString("name")
-                                + " " + rs.getString("lastname")
+                                + " " + rs.getString("lastname") // geters from the query result 
                                 + "\n id " + rs.getString("id")
                                 + "\n date of your last enter in this hospital and exit \n"
                                 + rs.getString("enterP")
@@ -178,14 +174,14 @@ public class View extends JFrame {
                     ex.printStackTrace();
 
                 }
-                if (flag == true) {
+                if (flag == true) {    // users profile button 
                     String user = user_lb;
                     JButton pf = new JButton(user);
                     pf.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             try {
-                                new Profile().ProfileP(rs);
+                                new Profile().ProfileP(rs); //  profile frame call 
                             } catch (SQLException ex) {
                                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -218,6 +214,7 @@ public class View extends JFrame {
 
         l2 = new JLabel("Username");
         l3 = new JLabel("Password");
+        l4 = new JLabel("           ");
         tf1 = new JTextField();
         p1 = new JTextField();
         btn1 = new JButton("Login");
@@ -225,18 +222,17 @@ public class View extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-
                     String sql = ("SELECT * FROM doctor WHERE name=? and password=?  ");
                     DataBase db = new DataBase();
                     Connection con = db.getConnection();
                     PreparedStatement pst = null;
-
+                    
                     try {
                         pst = con.prepareStatement(sql);
                     } catch (SQLException ex) {
                         Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    
                     pst.setString(1, tf1.getText());
                     pst.setString(2, p1.getText());
                     rs = pst.executeQuery();
@@ -255,7 +251,6 @@ public class View extends JFrame {
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-
                 }
                 if (flag == true) {
                     String user = user_lb;
@@ -263,21 +258,17 @@ public class View extends JFrame {
                     pf.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-
                             try {
                                 new Profile().ProfileD(rs);
                             } catch (SQLException ex) {
                                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                             }
-
                         }
                     });
                     mb.add(pf);
                 }
             }
         });
-
-        l4 = new JLabel("           ");
 
         p.setLayout(new GridLayout(7, 2));
 
@@ -295,9 +286,8 @@ public class View extends JFrame {
 
         JLabel l1, l2, l3, l3_5, l4, l5, l6, l7, l8, l9, l10, l11, l12;
         JTextField tf1, tf2, tf2_5, tf3, tf4, tf5, tf6, tf7, tf8;
-        JButton btn1;
+        JButton btn1;    // register button 
 
-        //JFrame frame = new JFrame("Register Form");
         l1 = new JLabel("       Register new");
         l1.setForeground(Color.blue);
         l1.setFont(new Font("Serif", Font.BOLD, 20));
@@ -332,11 +322,9 @@ public class View extends JFrame {
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DataBase base = new DataBase();
-
+                DataBase base = new DataBase();   // geters from text field 
                 Patient patient = new Patient(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
                         tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText(), tf8.getText());
-
                 try {
                     control.CreatePatient(patient, base);
                 } catch (SQLException ex) {
@@ -345,11 +333,10 @@ public class View extends JFrame {
 
             }
         });
-
         p.setLayout(new GridLayout(12, 2));
 
         p.add(l1);
-        p.add(l11);
+        p.add(l11); // head label 
         p.add(l2);
         p.add(tf1);
         p.add(l3);
@@ -370,17 +357,14 @@ public class View extends JFrame {
         p.add(tf8);
         p.add(l10);
         p.add(l12);
-        p.add(btn1);
-
+        p.add(btn1); // register button 
     }
 
     public void RegisterD() {
-
         JLabel l1, l2, l3, l3_5, l4, l5, l6, l7, l8, l10, l11, l12;
         JTextField tf1, tf2, tf2_5, tf3, tf4, tf5, tf6, tf7;
-        JButton btn1;
+        JButton btn1;  // login button 
 
-        //JFrame frame = new JFrame("Register Form");
         l1 = new JLabel("       Register new");
         l1.setForeground(Color.blue);
         l1.setFont(new Font("Serif", Font.BOLD, 20));
@@ -414,17 +398,15 @@ public class View extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DataBase base = new DataBase();
-
                 Doctor doc = new Doctor(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
                         tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText());
-
                 control.CreateDoctor(doc, base);
             }
         });
         p.setLayout(new GridLayout(12, 2));
 
         p.add(l1);
-        p.add(l11);
+        p.add(l11); // head label 
         p.add(l2);
         p.add(tf1);
         p.add(l3);
@@ -443,8 +425,6 @@ public class View extends JFrame {
         p.add(tf7);
         p.add(l10);
         p.add(l12);
-        p.add(btn1);
-
+        p.add(btn1); // login button 
     }
-
 }
