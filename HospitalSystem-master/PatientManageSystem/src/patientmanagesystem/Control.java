@@ -115,29 +115,16 @@ public class Control implements Control_Interface {
     }
 
     @Override
-    public void PrintAllDoctors(DataBase db) throws SQLException {
+    public ResultSet PrintAllDoctors(DataBase db) throws SQLException {
         Connection conn = db.initConnection();
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT iddoctor,name,lastname FROM doctor");
+        ResultSet rs = st.executeQuery("SELECT iddoctor,name,lastname,specialty FROM doctor");
         ResultSetMetaData rsmd = rs.getMetaData();
-
         int columnsNumber = rsmd.getColumnCount();
 
         rsmd = rs.getMetaData();
         columnsNumber = rsmd.getColumnCount();
-
-        // Iterate through the data in the result set and display it. 
-        while (rs.next()) {
-            //Print one row          
-            for (int i = 1; i <= columnsNumber; i++) {
-
-                System.out.print(rs.getString(i) + " "); //Print one element of a row
-
-            }
-
-            System.out.println();//Move to the next line to print the next row.           
-
-        }
+       return rs;
     }
 
     @Override
@@ -151,6 +138,27 @@ public class Control implements Control_Interface {
             System.out.println("Record deleted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void CreateAppointment(int id_p , int  id_d , DataBase db , String appointment) {
+        String sql = "INSERT INTO "
+                + " appointment ( id_app , id_doctor , id_patient , appointment ) "
+                + " VALUES(?,?,?,?) ";
+
+        try (Connection conn = db.initConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+           
+            pstmt.setInt(1, 1);
+            pstmt.setInt(2, id_d);
+            pstmt.setInt(3, id_p);
+            pstmt.setString(4,appointment);
+            
+            pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
