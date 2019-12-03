@@ -483,8 +483,8 @@ public class View extends JFrame {
     }
 
     public void Appointment() {
-        JLabel l1, l2, l3, l3_5, l4, l5, l6, l7, l8, l9, l10, l11, l12;
-        JTextField tf1, tf2, tf2_5, tf3, tf4, tf5, tf6, tf7, tf8;
+        JLabel l1, l2, l3, l3_5, l10, l11, l12;
+        JTextField tf1, tf2, tf2_5;
         JButton btn1;    // register button 
 
         l1 = new JLabel("        New");
@@ -512,7 +512,7 @@ public class View extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 DataBase base = new DataBase();   // geters from text field 
                 control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
-                        base, tf2_5.getText());
+                        base , tf2_5.getText());
 
             }
         });

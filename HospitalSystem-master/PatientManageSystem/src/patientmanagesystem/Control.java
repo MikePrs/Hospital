@@ -142,7 +142,7 @@ public class Control implements Control_Interface {
     }
 
     @Override
-    public void CreateAppointment(int id_p , int  id_d , DataBase db , String appointment) {
+    public void CreateAppointment(int id_d , int  id_p , DataBase db , String appointment) {
         String sql = "INSERT INTO "
                 + " appointment ( id_app , id_doctor , id_patient , appointment ) "
                 + " VALUES(?,?,?,?) ";
