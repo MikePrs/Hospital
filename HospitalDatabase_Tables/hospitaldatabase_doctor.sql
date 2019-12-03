@@ -33,7 +33,7 @@ CREATE TABLE `doctor` (
   `startDate` varchar(45) DEFAULT NULL,
   `specialty` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`iddoctor`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,15 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'Leonardo','Di Caprio','12345',40,'M','Mateo','10-9-2000','Orthopedic'),(2,'Nicole','Kitman','12345',38,'F','Bob','22-02-18','Dentist'),(5,'Stefanos','Tsitsipas','tennis123',24,'M','Alex','22-4-12','orthodedic');
+INSERT INTO `doctor` VALUES (1,'Leonardo','Di Caprio','12345',1980,'M','Mateo','10-9-2000','Orthopedic');
+INSERT INTO `doctor` VALUES (2,'Nicole','Kitman','12345',1984,'F','Bob','22-02-18','Dentist');
+INSERT INTO `doctor` VALUES (3,'Stefanos','Tsitsipas','tennis123',1983,'M','Alex','22-4-12','Dermatologist');
+INSERT INTO `doctor` VALUES (4,'margot','robbie','margot123',1982,'F','bill','22-9-2008','Anesthesiologist');
+INSERT INTO `doctor` VALUES (8,'Iker','Cassilas','ikeriker',1975,'M','Tibo','22-8-17','Neurologist');
+INSERT INTO `doctor` VALUES (9,'Jony','Walker','jonywalker',1975,'M','Walker','26-7-2006','Surger');
+INSERT INTO `doctor` VALUES (10,'Clark','Kent','superman',1969,'M','Kent','22-8-2008','Urologist');
+INSERT INTO `doctor` VALUES (11,'Miley','Cyrus','232323',1988,'F','Brad','22-9-2017','Cardiologists');
+INSERT INTO `doctor` VALUES (12,'Anni','Papa','123papa',1990,'F','Nick','22-9-2018','Gastroenterologist');
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-29 14:52:51
+-- Dump completed on 2019-12-03 11:46:32

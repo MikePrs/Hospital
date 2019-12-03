@@ -16,39 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `patient`
+-- Table structure for table `appointment`
 --
 
-DROP TABLE IF EXISTS `patient`;
+DROP TABLE IF EXISTS `appointment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `patient` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `lastname` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `sex` varchar(1) DEFAULT NULL,
-  `fatherName` varchar(45) DEFAULT NULL,
-  `occupation` varchar(45) DEFAULT NULL,
-  `enterP` varchar(45) DEFAULT NULL,
-  `exitP` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `appointment` (
+  `id_app` int(11) NOT NULL AUTO_INCREMENT,
+  `id_doctor` int(11) DEFAULT NULL,
+  `id_patient` int(11) DEFAULT NULL,
+  `appointment` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_app`),
+  KEY `id_doctor_idx` (`id_doctor`),
+  KEY `id_patient_idx` (`id_patient`),
+  CONSTRAINT `id_doctor` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`iddoctor`),
+  CONSTRAINT `id_patient` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `patient`
+-- Dumping data for table `appointment`
 --
 
-LOCK TABLES `patient` WRITE;
-/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'Mike','Prs','12345',20,'M','Manos','Programmer','20-2-2019','21-2-2019');
-INSERT INTO `patient` VALUES (3,'peter','parker','12345',23,'M','tom','spiderman','22-22-20','23-22-20');
-INSERT INTO `patient` VALUES (5,'Thanos','Kalpoutzis','12345',21,'F','John','Graphic Designer','12-3-18','14-3-18');
-INSERT INTO `patient` VALUES (6,'George','Clouney','12345',50,'M','Peter','Actor','22-9-17','25-9-17');
-INSERT INTO `patient` VALUES (7,'Elon','Mask','maskoff123',40,'M','mask','Enteprener','22-9-13','23-10-13');
-/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
+LOCK TABLES `appointment` WRITE;
+/*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -60,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-03 11:46:32
+-- Dump completed on 2019-12-03 11:46:31
