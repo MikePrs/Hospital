@@ -98,7 +98,7 @@ public class Profile extends JFrame {
         JLabel id = new JLabel(rs.getString("iddoctor"));
         JLabel name = new JLabel(rs.getString("name"));
         JLabel last = new JLabel(rs.getString("lastname"));
-        JLabel age = new JLabel(rs.getString("birth year"));
+        JLabel age = new JLabel(rs.getString("age"));
         JLabel sex = new JLabel(rs.getString("sex"));
         JLabel fatherN = new JLabel(rs.getString("fathersName"));
         JLabel occupation = new JLabel(rs.getString("startDate"));

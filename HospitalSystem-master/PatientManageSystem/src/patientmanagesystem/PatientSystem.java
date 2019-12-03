@@ -6,7 +6,6 @@
 package patientmanagesystem;
 
 import java.sql.*;
-import java.util.Scanner;
 
 /**
  *
@@ -21,14 +20,6 @@ public class PatientSystem {
         DataBase db = DataBase.getInstance();
         View view = new View();
         Control control = new Control(db, view);
-        
-       
-        
-
-        
-        control.PrintAllPatients(db);
-        control.PrintAllDoctors(db);
-        
     }
 
 }

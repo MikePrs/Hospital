@@ -5,8 +5,6 @@
  */
 package patientmanagesystem;
 
-import java.util.Scanner;
-
 /**
  *
  * @author mike_prs

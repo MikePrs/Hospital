@@ -7,14 +7,13 @@ package patientmanagesystem;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.sql.*;
-import static java.util.Collections.list;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import java.util.logging.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -41,11 +40,16 @@ public class View extends JFrame {
     public void View() {
     }
 
-    View() {
+    View() throws IOException {
         this.control = new Control();
 
         info = new JButton("info");
+        ImageIcon img = new ImageIcon("src\\Icons\\info.png");
+        info.setIcon(img);
+
         appointment = new JButton("make appointment");
+        ImageIcon cal = new ImageIcon("src\\Icons\\year.png");
+        appointment.setIcon(cal);
         appointment.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +60,8 @@ public class View extends JFrame {
             }
         });
         searchDoc = new JButton("search for doctor");
+        ImageIcon sr = new ImageIcon("src\\Icons\\search.png");
+        searchDoc.setIcon(sr);
         searchDoc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,6 +77,8 @@ public class View extends JFrame {
         });
 
         home = new JButton("HOME PAGE ");  // this should change 
+        ImageIcon hm = new ImageIcon("src\\Icons\\home1.png");
+        home.setIcon(hm);
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,6 +90,8 @@ public class View extends JFrame {
         });
 
         menu = new JMenu("LOGIN");
+        ImageIcon lg = new ImageIcon("src\\Icons\\unlock.png");
+        menu.setIcon(lg);
         i1 = new JMenuItem("PATIENT");
         i1.addActionListener(new ActionListener() {
             @Override
@@ -106,6 +116,8 @@ public class View extends JFrame {
         menu.add(i2);
 
         menu2 = new JMenu("REGISTER");
+        ImageIcon rg = new ImageIcon("src\\Icons\\plus.png");
+        menu2.setIcon(rg);
         i1 = new JMenuItem("NEW PATIENT");
         i1.addActionListener(new ActionListener() {
             @Override
@@ -173,9 +185,10 @@ public class View extends JFrame {
         p.add(l);
     }
 
-    public void LoginP() {
+    private void LoginP() {
         JLabel l1, l2, l3, l4;
-        JTextField tf1, p1;
+        JTextField tf1;
+        JPasswordField p1;
         JButton btn1;
 
         l1 = new JLabel("Login Patient Form");
@@ -185,7 +198,8 @@ public class View extends JFrame {
         l2 = new JLabel("Username");
         l3 = new JLabel("Password");
         tf1 = new JTextField();
-        p1 = new JTextField();
+        p1 = new JPasswordField();
+        p1.setEchoChar('*');
         btn1 = new JButton("Login");
         btn1.addActionListener(new ActionListener() {
             @Override
@@ -202,9 +216,9 @@ public class View extends JFrame {
                     } catch (SQLException ex) {
                         Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    char[] passw = p1.getPassword();
                     pst.setString(1, tf1.getText());
-                    pst.setString(2, p1.getText());
+                    pst.setString(2, String.valueOf(passw));
                     rs = pst.executeQuery();
 
                     if (rs.next()) {// if credencials are correct wintdow opens 
@@ -228,6 +242,8 @@ public class View extends JFrame {
                 if (flag == true) {    // users profile button 
                     String user = user_lb;
                     JButton pf = new JButton(user);
+                    ImageIcon us = new ImageIcon("src\\Icons\\user.png");
+                    pf.setIcon(us);
                     pf.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -238,7 +254,25 @@ public class View extends JFrame {
                             }
                         }
                     });
+                    JButton out = new JButton("LOGOUT");
+                    ImageIcon ot = new ImageIcon("src\\Icons\\logout.png");
+                    out.setIcon(ot);
+                    out.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            mb.remove(pf);
+                            mb.remove(out);
+                            mb.revalidate();
+                            mb.repaint();
+                            flag = false;
+                        }
+                    });
+                    mb.add(Box.createHorizontalGlue());
                     mb.add(pf);
+                    mb.add(Box.createHorizontalGlue());
+                    mb.add(out);
+                    mb.revalidate();
+                    mb.repaint();
                 }
             }
         });
@@ -255,9 +289,10 @@ public class View extends JFrame {
 
     }
 
-    public void LoginD() {
+    private void LoginD() {
         JLabel l1, l2, l3, l4;
-        JTextField tf1, p1;
+        JTextField tf1;
+        JPasswordField p1;
         JButton btn1;
 
         l1 = new JLabel("Login Doctor Form");
@@ -268,7 +303,8 @@ public class View extends JFrame {
         l3 = new JLabel("Password");
         l4 = new JLabel("           ");
         tf1 = new JTextField();
-        p1 = new JTextField();
+        p1 = new JPasswordField();
+        p1.setEchoChar('*');
         btn1 = new JButton("Login");
         btn1.addActionListener(new ActionListener() {
             @Override
@@ -284,9 +320,9 @@ public class View extends JFrame {
                     } catch (SQLException ex) {
                         Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    char[] passw = p1.getPassword();
                     pst.setString(1, tf1.getText());
-                    pst.setString(2, p1.getText());
+                    pst.setString(2, String.valueOf(passw));
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
@@ -307,6 +343,8 @@ public class View extends JFrame {
                 if (flag == true) {
                     String user = user_lb;
                     JButton pf = new JButton(user);
+                    ImageIcon us = new ImageIcon("src\\Icons\\user.png");
+                    pf.setIcon(us);
                     pf.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -317,7 +355,25 @@ public class View extends JFrame {
                             }
                         }
                     });
+                    JButton out = new JButton("LOGOUT");
+                    ImageIcon ot = new ImageIcon("src\\Icons\\logout.png");
+                    out.setIcon(ot);
+                    out.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            mb.remove(pf);
+                            mb.remove(out);
+                            mb.revalidate();
+                            mb.repaint();
+                            flag = false;
+                        }
+                    });
+                    mb.add(Box.createHorizontalGlue());
                     mb.add(pf);
+                    mb.add(Box.createHorizontalGlue());
+                    mb.add(out);
+                    mb.revalidate();
+                    mb.repaint();
                 }
             }
         });
@@ -334,7 +390,7 @@ public class View extends JFrame {
 
     }
 
-    public void RegisterP() {
+    private void RegisterP() {
 
         JLabel l1, l2, l3, l3_5, l4, l5, l6, l7, l8, l9, l10, l11, l12;
         JTextField tf1, tf2, tf2_5, tf3, tf4, tf5, tf6, tf7, tf8;
@@ -351,7 +407,7 @@ public class View extends JFrame {
         l2 = new JLabel("Name");
         l3 = new JLabel("Last Name");
         l3_5 = new JLabel("Password");
-        l4 = new JLabel("birth year");
+        l4 = new JLabel("age");
         l5 = new JLabel("sex");
         l6 = new JLabel("fathers name");
         l7 = new JLabel("occupation");
@@ -413,7 +469,7 @@ public class View extends JFrame {
         p.add(btn1); // register button 
     }
 
-    public void RegisterD() {
+    private void RegisterD() {
         JLabel l1, l2, l3, l3_5, l4, l5, l6, l7, l8, l10, l11, l12;
         JTextField tf1, tf2, tf2_5, tf3, tf4, tf5, tf6, tf7;
         JButton btn1;  // login button 
@@ -482,7 +538,7 @@ public class View extends JFrame {
         p.add(btn1); // login button 
     }
 
-    public void Appointment() {
+    private void Appointment() {
         JLabel l1, l2, l3, l3_5, l10, l11, l12;
         JTextField tf1, tf2, tf2_5;
         JButton btn1;    // register button 
@@ -507,15 +563,19 @@ public class View extends JFrame {
         tf2_5 = new JTextField();
 
         btn1 = new JButton("Register an apointment");
-        btn1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DataBase base = new DataBase();   // geters from text field 
-                control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
-                        base , tf2_5.getText());
+        if (flag == true) {
+            btn1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DataBase base = new DataBase();   // geters from text field 
+                    control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
+                            base, tf2_5.getText());
 
-            }
-        });
+                }
+            });
+        } else {
+            JOptionPane.showMessageDialog(null, " you have to login to make an appointment ");
+        }
         p.setBackground(Lblue);
         p.setLayout(new GridLayout(12, 2));
 
@@ -533,7 +593,7 @@ public class View extends JFrame {
         p.add(btn1); // register button 
     }
 
-    public void SearchDoc() throws SQLException {
+    private void SearchDoc() throws SQLException {
         ResultSet rss;
         DataBase base = new DataBase();
         rss = control.PrintAllDoctors(base);
@@ -556,12 +616,12 @@ public class View extends JFrame {
 
         JTable table = new JTable(buildTableModel(rss));
         table.setEnabled(false);
-        
+
         p.add(pn);
         p.add(table);
     }
 
-    public static DefaultTableModel buildTableModel(ResultSet rs) // to print rs from Doc select as Jtable 
+    private static DefaultTableModel buildTableModel(ResultSet rs) // to print rs from Doc select as Jtable 
             throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();

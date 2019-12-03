@@ -144,16 +144,16 @@ public class Control implements Control_Interface {
     @Override
     public void CreateAppointment(int id_d , int  id_p , DataBase db , String appointment) {
         String sql = "INSERT INTO "
-                + " appointment ( id_app , id_doctor , id_patient , appointment ) "
-                + " VALUES(?,?,?,?) ";
+                + " appointment ( id_doctor , id_patient , appointment ) "
+                + " VALUES(?,?,?) ";
 
         try (Connection conn = db.initConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
            
-            pstmt.setInt(1, 1);
-            pstmt.setInt(2, id_d);
-            pstmt.setInt(3, id_p);
-            pstmt.setString(4,appointment);
+            //pstmt.setInt(1, );
+            pstmt.setInt(1, id_d);
+            pstmt.setInt(2, id_p);
+            pstmt.setString(3,appointment);
             
             pstmt.executeUpdate();
             
