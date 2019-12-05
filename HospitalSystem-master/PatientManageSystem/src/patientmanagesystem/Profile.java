@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,10 +28,10 @@ public class Profile extends JFrame {
     public void ProfileP(ResultSet rs) throws SQLException {
 
         JFrame f = new JFrame("User Profile");
-        JPanel p = new JPanel();
+        JPanel pl = new JPanel();
         JPanel pp = new JPanel();
         JLabel l1, l11, l2, l3, l3_5, l4, l5, l6, l7, l8, l9;
-        p.setLayout(new GridLayout(10, 3));
+        pl.setLayout(new GridLayout(10, 3));
         JLabel id = new JLabel(rs.getString("id"));
         JLabel name = new JLabel(rs.getString("name"));
         JLabel last = new JLabel(rs.getString("lastname"));
@@ -41,10 +42,10 @@ public class Profile extends JFrame {
         JLabel enter = new JLabel(rs.getString("enterP"));
         JLabel exit = new JLabel(rs.getString("exitP"));
 
-        l1 = new JLabel("          Patient");
-        l1.setForeground(Color.blue);
-        l1.setFont(new Font("Serif", Font.BOLD, 20));   
-        l11 = new JLabel("Profile        ");
+        ImageIcon img = new ImageIcon("src\\Icons\\name.png");
+        l1 = new JLabel(img);
+        l1.setIcon(img);   
+        l11 = new JLabel("Patient Profile");
         l11.setForeground(Color.blue);
         l11.setFont(new Font("Serif", Font.BOLD, 20));// head label
 
@@ -58,28 +59,28 @@ public class Profile extends JFrame {
         l8 = new JLabel("enter date ");
         l9 = new JLabel("exit date ");
 
-        p.add(l1);
-        p.add(l11);
-        p.add(l2);
-        p.add(name);
-        p.add(l3);
-        p.add(last);
-        p.add(l3_5);
-        p.add(id);
-        p.add(l4);
-        p.add(age);
-        p.add(l5);
-        p.add(sex);
-        p.add(l6);
-        p.add(fatherN);
-        p.add(l7);
-        p.add(occupation);
-        p.add(l8);
-        p.add(enter);
-        p.add(l9);
-        p.add(exit);
+        pl.add(l1);
+        pl.add(l11);
+        pl.add(l2);
+        pl.add(name);
+        pl.add(l3);
+        pl.add(last);
+        pl.add(l3_5);
+        pl.add(id);
+        pl.add(l4);
+        pl.add(age);
+        pl.add(l5);
+        pl.add(sex);
+        pl.add(l6);
+        pl.add(fatherN);
+        pl.add(l7);
+        pl.add(occupation);
+        pl.add(l8);
+        pl.add(enter);
+        pl.add(l9);
+        pl.add(exit);
 
-        pp.add(p, BorderLayout.CENTER);
+        pp.add(pl, BorderLayout.CENTER);
 
         f.add(pp, BorderLayout.CENTER);
         f.setSize(300, 400);
@@ -90,10 +91,10 @@ public class Profile extends JFrame {
     public void ProfileD(ResultSet rs) throws SQLException {
 
         JFrame f = new JFrame("User Profile");
-        JPanel p = new JPanel();
+        JPanel pl = new JPanel();
         JPanel pp = new JPanel();
         JLabel l1, l11, l2, l3, l3_5, l4, l5, l6, l7, l8;
-        p.setLayout(new GridLayout(13, 3));
+        pl.setLayout(new GridLayout(13, 3));
         
         JLabel id = new JLabel(rs.getString("iddoctor"));
         JLabel name = new JLabel(rs.getString("name"));
@@ -104,10 +105,10 @@ public class Profile extends JFrame {
         JLabel occupation = new JLabel(rs.getString("startDate"));
         JLabel enter = new JLabel(rs.getString("specialty"));
 
-        l1 = new JLabel("          Doctor");
-        l1.setForeground(Color.blue);
-        l1.setFont(new Font("Serif", Font.BOLD, 20));
-        l11 = new JLabel("Profile        ");
+        ImageIcon img = new ImageIcon("src\\Icons\\name.png");
+        l1 = new JLabel(img);
+        l1.setIcon(img);
+        l11 = new JLabel("Doctor Profile ");
         l11.setForeground(Color.blue);
         l11.setFont(new Font("Serif", Font.BOLD, 20));  // head label 
 
@@ -120,26 +121,26 @@ public class Profile extends JFrame {
         l7 = new JLabel("occupation");
         l8 = new JLabel("start date ");
   
-        p.add(l1);
-        p.add(l11);
-        p.add(l2);
-        p.add(name);
-        p.add(l3);
-        p.add(last);
-        p.add(l3_5);
-        p.add(id);
-        p.add(l4);
-        p.add(age);
-        p.add(l5);
-        p.add(sex);
-        p.add(l6);
-        p.add(fatherN);
-        p.add(l7);
-        p.add(occupation);
-        p.add(l8);
-        p.add(enter);
+        pl.add(l1);
+        pl.add(l11);
+        pl.add(l2);
+        pl.add(name);
+        pl.add(l3);
+        pl.add(last);
+        pl.add(l3_5);
+        pl.add(id);
+        pl.add(l4);
+        pl.add(age);
+        pl.add(l5);
+        pl.add(sex);
+        pl.add(l6);
+        pl.add(fatherN);
+        pl.add(l7);
+        pl.add(occupation);
+        pl.add(l8);
+        pl.add(enter);
 
-        pp.add(p, BorderLayout.CENTER);
+        pp.add(pl, BorderLayout.CENTER);
 
         f.add(pp, BorderLayout.CENTER);
         f.setSize(300, 400);

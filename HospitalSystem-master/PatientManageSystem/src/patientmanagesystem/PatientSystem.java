@@ -5,6 +5,7 @@
  */
 package patientmanagesystem;
 
+import java.io.IOException;
 import java.sql.*;
 
 /**
@@ -13,10 +14,7 @@ import java.sql.*;
  */
 public class PatientSystem {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
         DataBase db = DataBase.getInstance();
         View view = new View();
         Control control = new Control(db, view);
