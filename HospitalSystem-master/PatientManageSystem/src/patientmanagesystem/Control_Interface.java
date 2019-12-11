@@ -22,7 +22,7 @@ public interface Control_Interface {
 
     void DeleteDoctor(int id, DataBase db) throws SQLException;
 
-    void PrintAllPatients(DataBase db) throws SQLException;
+    ResultSet PrintAllPatients(DataBase db,int id) throws SQLException;
 
     ResultSet PrintAllDoctors(DataBase db) throws SQLException;
 

@@ -9,11 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.sql.*;
-import java.util.*;
 import java.util.logging.*;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -64,7 +61,7 @@ public class View extends JFrame {
                 p.removeAll();
                 p.revalidate();
                 p.repaint();
-                p.add(ac.Appointment(flag));            
+                p.add(ac.Appointment(flag));
             }
         });
         searchDoc = new JButton("search for doctor");
@@ -178,7 +175,7 @@ public class View extends JFrame {
         f.add(leftP, BorderLayout.WEST);
         f.add(pp, BorderLayout.CENTER);
         f.setJMenuBar(mb);
-        f.setSize(700, 600);
+        f.setSize(750, 600);
         f.setVisible(true);
         f.addWindowListener(new WindowAdapter() {  // for closing
             @Override
@@ -345,6 +342,20 @@ public class View extends JFrame {
                     ex.printStackTrace();
                 }
                 if (flag == true) {
+                    JButton btnP = new JButton("Your Patients");
+                    btnP.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            p.removeAll();
+                            p.revalidate();
+                            p.repaint();
+                            try {
+                                p.add(ac.CheckPatients(rs.getInt("iddoctor")));
+                            } catch (SQLException ex) {
+                                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
                     String user = user_lb;
                     JButton pf = new JButton(user);
                     ImageIcon us = new ImageIcon("src\\Icons\\user.png");
@@ -367,11 +378,13 @@ public class View extends JFrame {
                         public void actionPerformed(ActionEvent e) {
                             mb.remove(pf);
                             mb.remove(out);
+                            mb.remove(btnP);
                             mb.revalidate();
                             mb.repaint();
                             flag = false;
                         }
                     });
+                    mb.add(btnP);
                     mb.add(Box.createHorizontalGlue());
                     mb.add(pf);
                     mb.add(Box.createHorizontalGlue());

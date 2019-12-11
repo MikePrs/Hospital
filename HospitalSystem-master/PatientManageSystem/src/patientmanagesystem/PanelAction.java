@@ -10,9 +10,12 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -318,5 +321,29 @@ public class PanelAction {
 
         return new DefaultTableModel(data, columnNames);
 
+    }
+
+    public JPanel CheckPatients(int id) throws SQLException {
+        p.removeAll();
+        p.revalidate();
+        p.repaint();
+
+        DataBase base = new DataBase();
+        ResultSet rss = control.PrintAllPatients(base, id);
+
+        JTable table = new JTable(buildTableModel(rss));
+        table.setEnabled(false);
+
+        JPanel pn = new JPanel();
+        pn.setBackground(Lblue);
+        pn.setLayout(new GridLayout(1, 4));
+        pn.add(new JLabel("id appointment"));
+        pn.add(new JLabel("patients id"));
+        pn.add(new JLabel("date"));
+        p.setLayout(new GridLayout(2, 1));
+        p.add(pn);
+        p.add(table);
+
+        return p;
     }
 }

@@ -66,29 +66,18 @@ public class Control implements Control_Interface {
     }
 
     @Override
-    public void PrintAllPatients(DataBase db) throws SQLException {
+    public ResultSet PrintAllPatients(DataBase db,int id) throws SQLException {
         Connection conn = db.initConnection();
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT id,name,lastname FROM patient");
+        ResultSet rs = st.executeQuery("SELECT id_app,id_patient,appointment FROM appointment WHERE id_doctor= "+id);
         ResultSetMetaData rsmd = rs.getMetaData();
 
         int columnsNumber = rsmd.getColumnCount();
-
+        
         rsmd = rs.getMetaData();
         columnsNumber = rsmd.getColumnCount();
-
-        // Iterate through the data in the result set and display it. 
-        while (rs.next()) {
-            //Print one row          
-            for (int i = 1; i <= columnsNumber; i++) {
-
-                System.out.print(rs.getString(i) + " "); //Print one element of a row
-
-            }
-
-            System.out.println();//Move to the next line to print the next row.           
-
-        }
+        
+        return rs ;
     }
 
     @Override
