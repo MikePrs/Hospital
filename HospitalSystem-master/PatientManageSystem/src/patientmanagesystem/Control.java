@@ -69,7 +69,7 @@ public class Control implements Control_Interface {
     public ResultSet PrintAllPatients(DataBase db,int id) throws SQLException {
         Connection conn = db.initConnection();
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT id_app,id_patient,appointment FROM appointment WHERE id_doctor= "+id);
+        ResultSet rs = st.executeQuery("SELECT id_app,id_patient,p_name,appointment FROM appointment WHERE id_doctor= "+id);
         ResultSetMetaData rsmd = rs.getMetaData();
 
         int columnsNumber = rsmd.getColumnCount();
@@ -131,10 +131,10 @@ public class Control implements Control_Interface {
     }
 
     @Override
-    public void CreateAppointment(int id_d , int  id_p , DataBase db , String appointment) {
+    public void CreateAppointment(int id_d , int  id_p , DataBase db,String p_name , String appointment) {
         String sql = "INSERT INTO "
-                + " appointment ( id_doctor , id_patient , appointment ) "
-                + " VALUES(?,?,?) ";
+                + " appointment ( id_doctor , id_patient ,p_name, appointment ) "
+                + " VALUES(?,?,?,?) ";
 
         try (Connection conn = db.initConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -142,7 +142,8 @@ public class Control implements Control_Interface {
             //pstmt.setInt(1, );
             pstmt.setInt(1, id_d);
             pstmt.setInt(2, id_p);
-            pstmt.setString(3,appointment);
+            pstmt.setString(3, p_name);
+            pstmt.setString(4,appointment);
             
             pstmt.executeUpdate();
             

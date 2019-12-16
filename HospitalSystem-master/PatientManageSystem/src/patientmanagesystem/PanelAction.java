@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,7 +42,8 @@ public class PanelAction {
         p.removeAll();
         p.revalidate();
         p.repaint();
-        JLabel l = new JLabel("welcome");
+        ImageIcon hm = new ImageIcon("src\\Icons\\home.jpg");
+        JLabel l = new JLabel(hm);
         p.setBackground(Lblue);
         p.add(l);
         return p;
@@ -209,28 +211,32 @@ public class PanelAction {
         p.removeAll();
         p.revalidate();
         p.repaint();
-        JLabel l1, l2, l3, l3_5, l10, l11, l12;
-        JTextField tf1, tf2, tf2_5;
+        JLabel l1, l2, l3, l3_5, l10, l11, l12, l4, l5;
+        JTextField tf1, tf2, tf2_5, tf4, tf5;
         JButton btn1;    // register button 
 
-        l1 = new JLabel("        New");
+        l1 = new JLabel("                 New");
         l1.setForeground(Color.blue);
         l1.setFont(new Font("Serif", Font.BOLD, 20));
 
-        l11 = new JLabel(" Appointment       ");
+        l11 = new JLabel(" Appointment                ");
         l11.setForeground(Color.blue);
         l11.setFont(new Font("Serif", Font.BOLD, 20));
 
         l2 = new JLabel("Doctors id ");
         l3 = new JLabel("Your id");
         l3_5 = new JLabel("Date");
+        l4 = new JLabel("Your name");
+        l5 = new JLabel("Type of doctor");
 
         l10 = new JLabel("          ");
         l12 = new JLabel("          ");
 
-        tf1 = new JTextField();
-        tf2 = new JTextField();
-        tf2_5 = new JTextField();
+        tf1 = new JTextField();  // id docotr
+        tf2 = new JTextField();   // id patient 
+        tf2_5 = new JTextField();   // date 
+        tf4 = new JTextField(); //name
+        tf5 = new JTextField();//type doctor
 
         btn1 = new JButton("Register an apointment");
         if (flag == true) {
@@ -239,7 +245,7 @@ public class PanelAction {
                 public void actionPerformed(ActionEvent e) {
                     DataBase base = new DataBase();   // geters from text field 
                     control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
-                            base, tf2_5.getText());
+                            base, tf5.getText(), tf2_5.getText());
 
                 }
             });
@@ -251,12 +257,16 @@ public class PanelAction {
 
         p.add(l1);
         p.add(l11); // head label 
+        p.add(l5);
+        p.add(tf4);// doctor type
         p.add(l2);
-        p.add(tf1);
+        p.add(tf1);// d id
+        p.add(l4);
+        p.add(tf5);// your name 
         p.add(l3);
-        p.add(tf2);
+        p.add(tf2);// your id 
         p.add(l3_5);
-        p.add(tf2_5);
+        p.add(tf2_5);//date
 
         p.add(l10);
         p.add(l12);
@@ -336,10 +346,12 @@ public class PanelAction {
 
         JPanel pn = new JPanel();
         pn.setBackground(Lblue);
-        pn.setLayout(new GridLayout(1, 4));
+        pn.setLayout(new GridLayout(1, 5));
         pn.add(new JLabel("id appointment"));
         pn.add(new JLabel("patients id"));
+        pn.add(new JLabel("patients name"));
         pn.add(new JLabel("date"));
+        
         p.setLayout(new GridLayout(2, 1));
         p.add(pn);
         p.add(table);

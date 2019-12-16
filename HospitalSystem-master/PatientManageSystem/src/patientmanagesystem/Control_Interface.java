@@ -26,6 +26,6 @@ public interface Control_Interface {
 
     ResultSet PrintAllDoctors(DataBase db) throws SQLException;
 
-    void CreateAppointment(int id_d,int id_p ,DataBase db,String appointment) throws SQLException;
+    void CreateAppointment(int id_d,int id_p ,DataBase db,String p_name ,String appointment) throws SQLException;
 
 }

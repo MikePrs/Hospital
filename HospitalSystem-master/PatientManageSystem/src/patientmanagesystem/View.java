@@ -23,7 +23,8 @@ public class View extends JFrame {
     JMenu menu, menu2;
     JButton home, info, appointment, searchDoc;
     JMenuItem i1, i2, i3;
-    JLabel l = new JLabel("welcome");
+    ImageIcon hm = new ImageIcon("src\\Icons\\home.jpg");
+    JLabel l = new JLabel(hm);
     JFrame f = new JFrame("Hospital Managment System");
     JPanel p = new JPanel();
     JPanel pp = new JPanel();
@@ -175,7 +176,7 @@ public class View extends JFrame {
         f.add(leftP, BorderLayout.WEST);
         f.add(pp, BorderLayout.CENTER);
         f.setJMenuBar(mb);
-        f.setSize(750, 600);
+        f.setSize(750, 500);
         f.setVisible(true);
         f.addWindowListener(new WindowAdapter() {  // for closing
             @Override
