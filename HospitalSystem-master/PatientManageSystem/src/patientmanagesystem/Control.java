@@ -16,7 +16,6 @@ public class Control implements Control_Interface {
     private DataBase base;
     private View view;
     public Connection conn;
-    public Connection conn1;
     Statement stmt = null;
 
     public Control(DataBase base, View view) {
@@ -52,8 +51,8 @@ public class Control implements Control_Interface {
     }
 
     @Override
-    public void DeletePatient(int id, DataBase db) throws SQLException {
-        String sql = "DELETE FROM patient WHERE  id = ? ";
+    public void DeleteAppointmet(int id, DataBase db) throws SQLException {
+        String sql = "DELETE FROM appointment WHERE id_app = ? ";
         try (Connection conn = db.initConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);

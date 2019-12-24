@@ -18,7 +18,7 @@ public interface Control_Interface {
 
     void CreateDoctor(Doctor doc, DataBase db) throws SQLException;
 
-    void DeletePatient(int id, DataBase db) throws SQLException;
+    void DeleteAppointmet(int id, DataBase db) throws SQLException;
 
     void DeleteDoctor(int id, DataBase db) throws SQLException;
 

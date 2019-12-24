@@ -18,8 +18,10 @@ import javax.swing.*;
  */
 public class View extends JFrame {
 
-    PanelAction ac = new PanelAction();
     private Control control;
+    DataBase db;
+    PanelAction ac ;
+
     JMenu menu, menu2;
     JButton home, info, appointment, searchDoc;
     JMenuItem i1, i2, i3;
@@ -36,10 +38,13 @@ public class View extends JFrame {
     Color blue = new Color(173, 226, 242);
     Color Lblue = new Color(191, 230, 242);
 
-    public void View() {
+    public void View(DataBase db) {
+
     }
 
-    View() throws IOException {
+    View(DataBase db) throws IOException {
+        this.db = db;
+        ac= new PanelAction(db);
         this.control = new Control();
 
         info = new JButton("info");
@@ -209,7 +214,6 @@ public class View extends JFrame {
                 try {
 
                     String sql = ("SELECT * FROM patient WHERE name=? and password=?  ");
-                    DataBase db = new DataBase();
                     Connection con = db.getConnection();
                     PreparedStatement pst = null;
 
@@ -250,7 +254,7 @@ public class View extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             try {
-                                new Profile().ProfileP(rs); //  profile frame call 
+                                new PopUps().ProfileP(rs); //  profile frame call 
                             } catch (SQLException ex) {
                                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -267,6 +271,7 @@ public class View extends JFrame {
                             mb.revalidate();
                             mb.repaint();
                             flag = false;
+                            
                         }
                     });
                     mb.add(Box.createHorizontalGlue());
@@ -313,7 +318,6 @@ public class View extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String sql = ("SELECT * FROM doctor WHERE name=? and password=?  ");
-                    DataBase db = new DataBase();
                     Connection con = db.getConnection();
                     PreparedStatement pst = null;
 
@@ -365,7 +369,7 @@ public class View extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             try {
-                                new Profile().ProfileD(rs);
+                                new PopUps().ProfileD(rs);
                             } catch (SQLException ex) {
                                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                             }

@@ -5,6 +5,7 @@
  */
 package patientmanagesystem;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -37,6 +38,12 @@ public class PanelAction {
     JPanel p = new JPanel();
     Color Lblue = new Color(191, 230, 242);
     Control control = new Control();
+    PopUps pop = new PopUps();
+    DataBase base;
+
+    PanelAction(DataBase db) {
+        this.base = db;
+    }
 
     public JPanel HomePage() {
         p.removeAll();
@@ -93,7 +100,7 @@ public class PanelAction {
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DataBase base = new DataBase();   // geters from text field 
+                // geters from text field 
                 Patient patient = new Patient(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
                         tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText(), tf8.getText());
                 try {
@@ -174,7 +181,7 @@ public class PanelAction {
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DataBase base = new DataBase();
+
                 Doctor doc = new Doctor(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
                         tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText());
                 control.CreateDoctor(doc, base);
@@ -243,7 +250,7 @@ public class PanelAction {
             btn1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DataBase base = new DataBase();   // geters from text field 
+                    // geters from text field 
                     control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
                             base, tf5.getText(), tf2_5.getText());
 
@@ -279,7 +286,7 @@ public class PanelAction {
         p.revalidate();
         p.repaint();
         ResultSet rss;
-        DataBase base = new DataBase();
+
         rss = control.PrintAllDoctors(base);
 
         JLabel lb1 = new JLabel("Id ");
@@ -338,24 +345,35 @@ public class PanelAction {
         p.revalidate();
         p.repaint();
 
-        DataBase base = new DataBase();
         ResultSet rss = control.PrintAllPatients(base, id);
-
+        JButton b = new JButton("Delete Appointment");
+        b.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pop.DeleteApp();
+            }
+        });
         JTable table = new JTable(buildTableModel(rss));
         table.setEnabled(false);
 
         JPanel pn = new JPanel();
+        JPanel pn2 = new JPanel();
         pn.setBackground(Lblue);
         pn.setLayout(new GridLayout(1, 5));
-        pn.add(new JLabel("id appointment"));
+        pn.add(new JLabel("id appointment    "));
         pn.add(new JLabel("patients id"));
         pn.add(new JLabel("patients name"));
         pn.add(new JLabel("date"));
+
+        pn2.add(b, BorderLayout.CENTER);
+        pn2.setBackground(Lblue);
         
-        p.setLayout(new GridLayout(2, 1));
+
+        p.setLayout(new GridLayout(3, 1));
         p.add(pn);
         p.add(table);
-
+        p.add(pn2);
         return p;
     }
+     
 }

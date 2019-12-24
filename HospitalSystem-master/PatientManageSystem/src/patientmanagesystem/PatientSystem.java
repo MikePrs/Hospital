@@ -16,7 +16,7 @@ public class PatientSystem {
 
     public static void main(String[] args) throws SQLException, IOException {
         DataBase db = DataBase.getInstance();
-        View view = new View();
+        View view = new View(db);
         Control control = new Control(db, view);
     }
 
