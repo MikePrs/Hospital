@@ -11,17 +11,15 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,6 +38,7 @@ public class PanelAction {
     Control control = new Control();
     PopUps pop = new PopUps();
     DataBase base;
+    View v = new View();
 
     PanelAction(DataBase db) {
         this.base = db;
@@ -288,7 +287,6 @@ public class PanelAction {
         ResultSet rss;
 
         rss = control.PrintAllDoctors(base);
-
         JLabel lb1 = new JLabel("Id ");
         JLabel lb2 = new JLabel("Name");
         JLabel lb3 = new JLabel("LastName");
@@ -310,6 +308,7 @@ public class PanelAction {
 
         p.add(pn);
         p.add(table);
+
         return p;
     }
 
@@ -367,7 +366,6 @@ public class PanelAction {
 
         pn2.add(b, BorderLayout.CENTER);
         pn2.setBackground(Lblue);
-        
 
         p.setLayout(new GridLayout(3, 1));
         p.add(pn);
@@ -375,5 +373,30 @@ public class PanelAction {
         p.add(pn2);
         return p;
     }
-     
+
+    public JPanel Admin() {
+        p.removeAll();
+        p.revalidate();
+        p.repaint();
+
+        JButton b1 = new JButton("delete doctor");
+        JButton b2 = new JButton("delete patient");
+        JButton b3 = new JButton("delete app");
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pop.DeleteApp();
+            }
+        });
+        JPanel p = new JPanel();
+        p.setBackground(Lblue);
+        JPanel pp = new JPanel();
+        pp.setLayout(new GridLayout(3, 1));
+        pp.add(b1);
+        pp.add(b2);
+        pp.add(b3);
+        p.add(pp, BorderLayout.CENTER);
+
+        return p;
+    }
 }

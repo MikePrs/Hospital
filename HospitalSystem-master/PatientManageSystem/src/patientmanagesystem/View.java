@@ -6,6 +6,7 @@
 package patientmanagesystem;
 
 import java.awt.*;
+import static java.awt.Color.green;
 import java.awt.event.*;
 import java.io.IOException;
 import java.sql.*;
@@ -20,7 +21,7 @@ public class View extends JFrame {
 
     private Control control;
     DataBase db;
-    PanelAction ac ;
+    PanelAction ac;
 
     JMenu menu, menu2;
     JButton home, info, appointment, searchDoc;
@@ -37,14 +38,17 @@ public class View extends JFrame {
     boolean flag = false;
     Color blue = new Color(173, 226, 242);
     Color Lblue = new Color(191, 230, 242);
+    JButton uts = new JButton("Admin");
+
+    View() {
+    }
 
     public void View(DataBase db) {
-
     }
 
     View(DataBase db) throws IOException {
         this.db = db;
-        ac= new PanelAction(db);
+        ac = new PanelAction(db);
         this.control = new Control();
 
         info = new JButton("info");
@@ -245,6 +249,23 @@ public class View extends JFrame {
                     ex.printStackTrace();
 
                 }
+                try {
+                    if ("1".equals(rs.getString("id"))) {
+                        uts.setBackground(green);
+                        mb.add(uts);
+                        uts.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                p.removeAll();
+                                p.revalidate();
+                                p.repaint();
+                                p.add(ac.Admin());
+                            }
+                        });
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 if (flag == true) {    // users profile button 
                     String user = user_lb;
                     JButton pf = new JButton(user);
@@ -268,10 +289,11 @@ public class View extends JFrame {
                         public void actionPerformed(ActionEvent e) {
                             mb.remove(pf);
                             mb.remove(out);
+                            mb.remove(uts);
                             mb.revalidate();
                             mb.repaint();
                             flag = false;
-                            
+
                         }
                     });
                     mb.add(Box.createHorizontalGlue());
@@ -293,7 +315,6 @@ public class View extends JFrame {
         p.add(p1);
         p.add(l4);
         p.add(btn1);
-
     }
 
     private void LoginD() {
@@ -399,7 +420,6 @@ public class View extends JFrame {
                 }
             }
         });
-
         p.setLayout(new GridLayout(7, 2));
         p.setBackground(Lblue);
         p.add(l1);
@@ -409,7 +429,5 @@ public class View extends JFrame {
         p.add(p1);
         p.add(l4);
         p.add(btn1);
-
     }
-
 }

@@ -153,7 +153,7 @@ public class PopUps extends JFrame {
         f.setVisible(true);
     }
 
-    void DeleteApp() {
+    public void DeleteApp() {
         DataBase db = new DataBase();
         JFrame f = new JFrame("Deleting");
         JPanel pp = new JPanel();
@@ -190,4 +190,6 @@ public class PopUps extends JFrame {
         f.setSize(350, 100);
         f.setVisible(true);
     }
+
+  
 }
