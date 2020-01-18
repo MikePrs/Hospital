@@ -380,7 +380,19 @@ public class PanelAction {
         p.repaint();
 
         JButton b1 = new JButton("delete doctor");
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pop.DeleteDoc();
+            }
+        });
         JButton b2 = new JButton("delete patient");
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pop.DeletePat();
+            }
+        });
         JButton b3 = new JButton("delete app");
         b3.addActionListener(new ActionListener() {
             @Override

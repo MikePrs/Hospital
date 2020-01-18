@@ -206,7 +206,7 @@ public class View extends JFrame {
         l1.setForeground(Color.blue);
         l1.setFont(new Font("Serif", Font.BOLD, 20));
 
-        l2 = new JLabel("Username");
+        l2 = new JLabel("Name");
         l3 = new JLabel("Password");
         tf1 = new JTextField();
         p1 = new JPasswordField();
@@ -219,7 +219,7 @@ public class View extends JFrame {
 
                     String sql = ("SELECT * FROM patient WHERE name=? and password=?  ");
                     Connection con = db.getConnection();
-                    PreparedStatement pst = null;
+                    PreparedStatement pst = null ;
 
                     try {
                         pst = con.prepareStatement(sql);
@@ -250,7 +250,7 @@ public class View extends JFrame {
 
                 }
                 try {
-                    if ("1".equals(rs.getString("id"))) {
+                    if (("1".equals(rs.getString("id")))||("14".equals(rs.getString("id")))) { // admin 
                         uts.setBackground(green);
                         mb.add(uts);
                         uts.addActionListener(new ActionListener() {
@@ -327,7 +327,7 @@ public class View extends JFrame {
         l1.setForeground(Color.blue);
         l1.setFont(new Font("Serif", Font.BOLD, 20));
 
-        l2 = new JLabel("Username");
+        l2 = new JLabel("Name");
         l3 = new JLabel("Password");
         l4 = new JLabel("           ");
         tf1 = new JTextField();

@@ -190,6 +190,75 @@ public class PopUps extends JFrame {
         f.setSize(350, 100);
         f.setVisible(true);
     }
+    public void DeletePat(){
+        DataBase db = new DataBase();
+        JFrame f = new JFrame("Deleting");
+        JPanel pp = new JPanel();
+        JPanel p = new JPanel();
+        p.setLayout(new GridLayout(3, 2));
+        JLabel l1 = new JLabel("                          Delete");
+        JLabel l2 = new JLabel("     Patient");
+        l1.setForeground(Color.red);
+        l2.setForeground(Color.red);
+        JLabel l = new JLabel("Patients ID");
+        JTextField tf = new JTextField();
 
+        JButton bb = new JButton("Delete");
+        bb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    control.DeleteAppointmet(Integer.parseInt(tf.getText()), db);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PopUps.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        p.add(l1);
+        p.add(l2);
+        p.add(l);
+        p.add(tf);
+        //  p.add(b);
+        pp.add(p, BorderLayout.CENTER);
+        pp.add(bb, BorderLayout.SOUTH);
+
+        f.add(pp, BorderLayout.CENTER);
+
+        f.setSize(350, 100);
+        f.setVisible(true);
+    }
+    public void DeleteDoc(){
+        DataBase db = new DataBase();
+        JFrame f = new JFrame("Deleting");
+        JPanel pp = new JPanel();
+        JPanel p = new JPanel();
+        p.setLayout(new GridLayout(3, 2));
+        JLabel l1 = new JLabel("                          Delete");
+        JLabel l2 = new JLabel("     Doctor");
+        l1.setForeground(Color.red);
+        l2.setForeground(Color.red);
+        JLabel l = new JLabel("Doctors ID");
+        JTextField tf = new JTextField();
+
+        JButton bb = new JButton("Delete");
+        bb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.DeleteDoctor(Integer.parseInt(tf.getText()), db);
+            }
+        });
+        p.add(l1);
+        p.add(l2);
+        p.add(l);
+        p.add(tf);
+        //  p.add(b);
+        pp.add(p, BorderLayout.CENTER);
+        pp.add(bb, BorderLayout.SOUTH);
+
+        f.add(pp, BorderLayout.CENTER);
+
+        f.setSize(350, 100);
+        f.setVisible(true);
+    }
   
 }
