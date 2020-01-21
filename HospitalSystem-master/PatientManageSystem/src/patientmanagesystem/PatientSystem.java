@@ -14,6 +14,12 @@ import java.sql.*;
  */
 public class PatientSystem {
 
+    /**
+     *
+     * @param args
+     * @throws SQLException
+     * @throws IOException
+     */
     public static void main(String[] args) throws SQLException, IOException {
         DataBase db = DataBase.getInstance();
         View view = new View(db);

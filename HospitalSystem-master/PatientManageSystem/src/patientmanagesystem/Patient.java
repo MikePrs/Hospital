@@ -15,6 +15,18 @@ public class Patient extends User {
     private String enter; // enter hospital date 
     private String exit; // exit hospital date 
    
+    /**
+     *
+     * @param name
+     * @param lastname
+     * @param psw
+     * @param age
+     * @param sex
+     * @param fathersName
+     * @param occupation
+     * @param enter
+     * @param exit
+     */
     public Patient( String name, String lastname,String psw, int age, String sex,String fathersName, 
             String occupation, String enter, String exit) {
 

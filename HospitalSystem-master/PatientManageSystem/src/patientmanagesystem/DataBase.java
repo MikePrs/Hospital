@@ -18,6 +18,10 @@ public class DataBase {
         this.initConnection();
     }
 
+    /**
+     *
+     * @return
+     */
     public Connection initConnection() {
         try {
             this.url = "jdbc:mysql://localhost:3306/hospitaldatabase?useSSL=false";
@@ -32,6 +36,10 @@ public class DataBase {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public static DataBase getInstance() {
         if (instance != null) {
             System.out.println("This is a singleton object");
@@ -43,6 +51,10 @@ public class DataBase {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Connection getConnection() {
         return this.conn;
     }

@@ -3,11 +3,7 @@ package patientmanagesystem;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 /**
  *
  * @author mikep
@@ -21,8 +17,9 @@ public interface Control_Interface {
     void DeleteAppointmet(int id, DataBase db) throws SQLException;
 
     void DeleteDoctor(int id, DataBase db) throws SQLException;
+    
+    void DeletePatient(int id, DataBase db) throws SQLException;
 
-    ResultSet PrintAllPatients(DataBase db,int id) throws SQLException;
 
     ResultSet PrintAllDoctors(DataBase db) throws SQLException;
 

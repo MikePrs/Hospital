@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
+/** actions that shows up in new frame 
  *
  * @author mikep
  */
@@ -31,6 +31,11 @@ public class PopUps extends JFrame {
     ResultSet rs;
     Control control = new Control();
 
+    /**
+     * frame that shows complete list of patients details like id name etc
+     * @param rs
+     * @throws SQLException
+     */
     public void ProfileP(ResultSet rs) throws SQLException {
 
         JFrame f = new JFrame("User Profile");
@@ -89,11 +94,16 @@ public class PopUps extends JFrame {
         pp.add(pl, BorderLayout.CENTER);
 
         f.add(pp, BorderLayout.CENTER);
-        f.setSize(300, 400);
+        f.setBounds(850, 100, 300, 400);
         f.setVisible(true);
 
     }
 
+    /** frame with
+     * complete list of details for doctor
+     * @param rs
+     * @throws SQLException
+     */
     public void ProfileD(ResultSet rs) throws SQLException {
 
         JFrame f = new JFrame("User Profile");
@@ -149,10 +159,14 @@ public class PopUps extends JFrame {
         pp.add(pl, BorderLayout.CENTER);
 
         f.add(pp, BorderLayout.CENTER);
-        f.setSize(300, 400);
+        f.setBounds(850, 100, 350, 90);
         f.setVisible(true);
     }
 
+    /**
+     * admins frame that shows the form for deleting 
+     * an appointment 
+     */
     public void DeleteApp() {
         DataBase db = new DataBase();
         JFrame f = new JFrame("Deleting");
@@ -186,11 +200,15 @@ public class PopUps extends JFrame {
         pp.add(bb, BorderLayout.SOUTH);
 
         f.add(pp, BorderLayout.CENTER);
-
-        f.setSize(350, 100);
+        f.setBounds(850, 100, 350, 90);
         f.setVisible(true);
     }
-    public void DeletePat(){
+
+    /**
+     * admins frame that shows the form for deleting 
+     * a patient  
+     */
+    public void DeletePat() {
         DataBase db = new DataBase();
         JFrame f = new JFrame("Deleting");
         JPanel pp = new JPanel();
@@ -208,7 +226,7 @@ public class PopUps extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    control.DeleteAppointmet(Integer.parseInt(tf.getText()), db);
+                    control.DeletePatient(Integer.parseInt(tf.getText()), db);
                 } catch (SQLException ex) {
                     Logger.getLogger(PopUps.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -223,11 +241,14 @@ public class PopUps extends JFrame {
         pp.add(bb, BorderLayout.SOUTH);
 
         f.add(pp, BorderLayout.CENTER);
-
-        f.setSize(350, 100);
+        f.setBounds(850, 100, 350, 90);
         f.setVisible(true);
     }
-    public void DeleteDoc(){
+
+    /** admins frame that shows the form for deleting 
+     * a doctor  
+     */
+    public void DeleteDoc() {
         DataBase db = new DataBase();
         JFrame f = new JFrame("Deleting");
         JPanel pp = new JPanel();
@@ -256,9 +277,8 @@ public class PopUps extends JFrame {
         pp.add(bb, BorderLayout.SOUTH);
 
         f.add(pp, BorderLayout.CENTER);
-
-        f.setSize(350, 100);
+        f.setBounds(850, 100, 350, 90);
         f.setVisible(true);
     }
-  
+
 }

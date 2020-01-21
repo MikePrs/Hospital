@@ -20,9 +20,21 @@ public class User {
     private int age;
     private String fathersName;
 
+    /**
+     *
+     */
     public User() {
     }
 
+    /**
+     *
+     * @param name
+     * @param lastname
+     * @param sex
+     * @param psw
+     * @param age
+     * @param fathersName
+     */
     public User(String name, String lastname, String sex,String psw, int age, String fathersName) {
         this.id = id;
         this.name = name;

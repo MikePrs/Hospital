@@ -13,6 +13,18 @@ public class Doctor extends User {
     private String startD;
     private int docId;
     private String specialty;
+
+    /**
+     *
+     * @param name
+     * @param lastname
+     * @param psw
+     * @param age
+     * @param sex
+     * @param fathersName
+     * @param startD
+     * @param specialty
+     */
     public Doctor(String name, String lastname,String psw, int age , String sex, String fathersName,
             String startD,String specialty) {
         super(name, lastname, sex,psw, age, fathersName);

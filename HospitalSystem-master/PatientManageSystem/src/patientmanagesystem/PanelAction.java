@@ -28,7 +28,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * actions that shown in main panel 
+ * all this methods returning a new panel 
+ * 
  * @author mikep
  */
 public class PanelAction {
@@ -44,6 +46,11 @@ public class PanelAction {
         this.base = db;
     }
 
+    /** 
+     * home page photo 
+     * 
+     * @return
+     */
     public JPanel HomePage() {
         p.removeAll();
         p.revalidate();
@@ -56,6 +63,11 @@ public class PanelAction {
 
     }
 
+    /** 
+     * register patient form 
+     *
+     * @return
+     */
     public JPanel RegisterP() {
         p.removeAll();
         p.revalidate();
@@ -103,7 +115,7 @@ public class PanelAction {
                 Patient patient = new Patient(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
                         tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText(), tf8.getText());
                 try {
-                    control.CreatePatient(patient, base);
+                    control.CreatePatient(patient, base); // database 
                 } catch (SQLException ex) {
                     Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -111,7 +123,7 @@ public class PanelAction {
             }
         });
         p.setBackground(Lblue);
-        p.setLayout(new GridLayout(12, 2));
+        p.setLayout(new GridLayout(12, 2)); // main panel
 
         p.add(l1);
         p.add(l11); // head label 
@@ -139,6 +151,11 @@ public class PanelAction {
         return p;
     }
 
+    /** 
+     * register doctor doctor
+     *
+     * @return
+     */
     public JPanel RegisterD() {
         p.removeAll();
         p.revalidate();
@@ -183,7 +200,7 @@ public class PanelAction {
 
                 Doctor doc = new Doctor(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
                         tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText());
-                control.CreateDoctor(doc, base);
+                control.CreateDoctor(doc, base); // database 
             }
         });
         p.setBackground(Lblue);
@@ -213,6 +230,13 @@ public class PanelAction {
         return p;
     }
 
+    /** 
+     * only if user is logged in 
+     * appointment form 
+     *
+     * @param flag
+     * @return
+     */
     public JPanel Appointment(boolean flag) {
         p.removeAll();
         p.revalidate();
@@ -245,13 +269,13 @@ public class PanelAction {
         tf5 = new JTextField();//type doctor
 
         btn1 = new JButton("Register an apointment");
-        if (flag == true) {
+        if (flag == true) {   // falg true means user is loged in 
             btn1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // geters from text field 
                     control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
-                            base, tf5.getText(), tf2_5.getText());
+                            base, tf5.getText(), tf2_5.getText()); // database 
 
                 }
             });
@@ -280,19 +304,27 @@ public class PanelAction {
         return p;
     }
 
+    /** 
+     * called from side bar button 
+     * shows a table with all doctors and 
+     * their details 
+     *
+     * @return
+     * @throws SQLException
+     */
     public JPanel SearchDoc() throws SQLException {
         p.removeAll();
         p.revalidate();
         p.repaint();
-        ResultSet rss;
+        ResultSet rss; 
 
-        rss = control.PrintAllDoctors(base);
+        rss = control.PrintAllDoctors(base); // database results
         JLabel lb1 = new JLabel("Id ");
         JLabel lb2 = new JLabel("Name");
         JLabel lb3 = new JLabel("LastName");
         JLabel lb4 = new JLabel("Occupation");
 
-        JPanel pn = new JPanel();
+        JPanel pn = new JPanel(); // labels panel 
         pn.setBackground(Lblue);
         pn.setLayout(new GridLayout(1, 4));
         pn.add(lb1);
@@ -301,9 +333,9 @@ public class PanelAction {
         pn.add(lb4);
 
         p.setLayout(new GridLayout(2, 1));
-        p.setBackground(Lblue);
+        p.setBackground(Lblue);// main panel
 
-        JTable table = new JTable(buildTableModel(rss));
+        JTable table = new JTable(buildTableModel(rss)); // doctors table
         table.setEnabled(false);
 
         p.add(pn);
@@ -317,12 +349,10 @@ public class PanelAction {
 
         ResultSetMetaData metaData = rs.getMetaData();
 
-        // names of columns
         Vector<String> columnNames = new Vector<String>();
         int columnCount = metaData.getColumnCount();
         for (int column = 1; column <= columnCount; column++) {
             columnNames.add(metaData.getColumnName(column));
-
         }
 
         // data of the table
@@ -339,24 +369,33 @@ public class PanelAction {
 
     }
 
+    /**
+     * only for doctors 
+     * called from menu bar button 
+     * shows only theirs appointments 
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public JPanel CheckPatients(int id) throws SQLException {
         p.removeAll();
         p.revalidate();
         p.repaint();
 
-        ResultSet rss = control.PrintAllPatients(base, id);
-        JButton b = new JButton("Delete Appointment");
+        ResultSet rss = control.PrintAllPatients(base, id); // database control
+        JButton b = new JButton("Delete Appointment"); 
         b.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pop.DeleteApp();
+                pop.DeleteApp(); // call deleting new frame 
             }
         });
         JTable table = new JTable(buildTableModel(rss));
         table.setEnabled(false);
 
-        JPanel pn = new JPanel();
-        JPanel pn2 = new JPanel();
+        JPanel pn = new JPanel(); // labels panel
+        JPanel pn2 = new JPanel();// button panel
         pn.setBackground(Lblue);
         pn.setLayout(new GridLayout(1, 5));
         pn.add(new JLabel("id appointment    "));
@@ -367,13 +406,19 @@ public class PanelAction {
         pn2.add(b, BorderLayout.CENTER);
         pn2.setBackground(Lblue);
 
-        p.setLayout(new GridLayout(3, 1));
-        p.add(pn);
-        p.add(table);
-        p.add(pn2);
-        return p;
+        p.setLayout(new GridLayout(3, 1)); // main panel
+        p.add(pn); // labels
+        p.add(table); // appointments table 
+        p.add(pn2); // delete appointment button 
+        return p; 
     }
 
+    /** 
+     * only for admin  
+     * shows the options for admin user
+     * 
+     * @return
+     */
     public JPanel Admin() {
         p.removeAll();
         p.revalidate();
@@ -383,31 +428,31 @@ public class PanelAction {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pop.DeleteDoc();
+                pop.DeleteDoc(); // delete doctor button
             }
         });
         JButton b2 = new JButton("delete patient");
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pop.DeletePat();
+                pop.DeletePat();// delete patient button 
             }
         });
         JButton b3 = new JButton("delete app");
         b3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pop.DeleteApp();
+                pop.DeleteApp(); // delete appointment button 
             }
         });
         JPanel p = new JPanel();
         p.setBackground(Lblue);
         JPanel pp = new JPanel();
-        pp.setLayout(new GridLayout(3, 1));
-        pp.add(b1);
-        pp.add(b2);
-        pp.add(b3);
-        p.add(pp, BorderLayout.CENTER);
+        pp.setLayout(new GridLayout(3, 1)); // button panel
+        pp.add(b1); // delete doctor
+        pp.add(b2);// delete patient
+        pp.add(b3);// delete appointment
+        p.add(pp, BorderLayout.CENTER); // main panel
 
         return p;
     }
