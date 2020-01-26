@@ -281,7 +281,8 @@ public class View extends JFrame {
                         });
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("no admin");
+
                 }
                 if (flag == true) {    // users profile button if logged in 
                     String user = user_lb;
@@ -294,7 +295,7 @@ public class View extends JFrame {
                             try {
                                 new PopUps().ProfileP(rs); // // shows frame with profile details
                             } catch (SQLException ex) {
-                                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                                System.out.println("login failed");
                             }
                         }
                     });
@@ -421,7 +422,7 @@ public class View extends JFrame {
                             try {
                                 new PopUps().ProfileD(rs); // shows frame with profile details
                             } catch (SQLException ex) {
-                                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                                System.out.println("login failed");
                             }
                         }
                     });
