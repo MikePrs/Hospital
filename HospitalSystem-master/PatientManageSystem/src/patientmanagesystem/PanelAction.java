@@ -28,9 +28,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * actions that shown in main panel 
- * all this methods returning a new panel 
- * 
+ * actions that shown in main panel all this methods returning a new panel
+ *
  * @author mikep
  */
 public class PanelAction {
@@ -46,9 +45,9 @@ public class PanelAction {
         this.base = db;
     }
 
-    /** 
-     * home page photo 
-     * 
+    /**
+     * home page photo
+     *
      * @return
      */
     public JPanel HomePage() {
@@ -63,8 +62,8 @@ public class PanelAction {
 
     }
 
-    /** 
-     * register patient form 
+    /**
+     * register patient form
      *
      * @return
      */
@@ -115,7 +114,17 @@ public class PanelAction {
                 Patient patient = new Patient(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
                         tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText(), tf8.getText());
                 try {
-                    control.CreatePatient(patient, base); // database 
+                    if ((tf1.getText().isEmpty()) || (tf2.getText().isEmpty()) || (tf2_5.getText().isEmpty()) || (tf3.getText().isEmpty())
+                            || (tf4.getText().isEmpty()) || (tf5.getText().isEmpty()) || (tf6.getText().isEmpty()) || (tf7.getText().isEmpty()) || (tf8.getText().isEmpty())) {
+                        JOptionPane.showMessageDialog(null, "Not registered fill all fields");
+                    } else {
+                        control.CreatePatient(patient, base); // database 
+                        JOptionPane.showMessageDialog(null, "Registered!");
+                        int option = JOptionPane.OK_CANCEL_OPTION;
+                        if(option==2){
+                            HomePage();
+                        }
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -151,7 +160,7 @@ public class PanelAction {
         return p;
     }
 
-    /** 
+    /**
      * register doctor doctor
      *
      * @return
@@ -198,9 +207,19 @@ public class PanelAction {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Doctor doc = new Doctor(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
-                        tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText());
-                control.CreateDoctor(doc, base); // database 
+                if ((tf1.getText().isEmpty()) || (tf2.getText().isEmpty()) || (tf2_5.getText().isEmpty()) || (tf3.getText().isEmpty())
+                        || (tf4.getText().isEmpty()) || (tf5.getText().isEmpty()) || (tf6.getText().isEmpty()) || (tf7.getText().isEmpty())) {
+                    JOptionPane.showMessageDialog(null, "Not registered fill all fields");
+                } else {
+                    Doctor doc = new Doctor(tf1.getText(), tf2.getText(), tf2_5.getText(), Integer.parseInt(tf3.getText()),
+                            tf4.getText(), tf5.getText(), tf6.getText(), tf7.getText());
+                    control.CreateDoctor(doc, base); // database
+                    JOptionPane.showMessageDialog(null, "Registered");
+                    int option = JOptionPane.OK_CANCEL_OPTION;
+                        if(option==2){
+                            HomePage();
+                        }
+                }
             }
         });
         p.setBackground(Lblue);
@@ -230,9 +249,8 @@ public class PanelAction {
         return p;
     }
 
-    /** 
-     * only if user is logged in 
-     * appointment form 
+    /**
+     * only if user is logged in appointment form
      *
      * @param flag
      * @return
@@ -273,9 +291,21 @@ public class PanelAction {
             btn1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // geters from text field 
-                    control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
-                            base, tf5.getText(), tf2_5.getText()); // database 
+                    if ((tf1.getText().isEmpty()) || (tf2.getText().isEmpty()) || (tf2_5.getText().isEmpty())
+                            || (tf4.getText().isEmpty()) || (tf5.getText().isEmpty())) {
+                        JOptionPane.showMessageDialog(null, "Not registered fill all fields");
+                        
+                        
+                    } else {
+                        // geters from text field 
+                        control.CreateAppointment(Integer.parseInt(tf1.getText()), Integer.parseInt(tf2.getText()),
+                                base, tf5.getText(), tf2_5.getText()); // database 
+                        JOptionPane.showMessageDialog(null, "Registered!");
+                        int option = JOptionPane.OK_CANCEL_OPTION;
+                        if(option==2){
+                            HomePage();
+                        }
+                    }
 
                 }
             });
@@ -304,10 +334,9 @@ public class PanelAction {
         return p;
     }
 
-    /** 
-     * called from side bar button 
-     * shows a table with all doctors and 
-     * their details 
+    /**
+     * called from side bar button shows a table with all doctors and their
+     * details
      *
      * @return
      * @throws SQLException
@@ -316,7 +345,7 @@ public class PanelAction {
         p.removeAll();
         p.revalidate();
         p.repaint();
-        ResultSet rss; 
+        ResultSet rss;
 
         rss = control.PrintAllDoctors(base); // database results
         JLabel lb1 = new JLabel("Id ");
@@ -370,9 +399,8 @@ public class PanelAction {
     }
 
     /**
-     * only for doctors 
-     * called from menu bar button 
-     * shows only theirs appointments 
+     * only for doctors called from menu bar button shows only theirs
+     * appointments
      *
      * @param id
      * @return
@@ -384,7 +412,7 @@ public class PanelAction {
         p.repaint();
 
         ResultSet rss = control.PrintAllPatients(base, id); // database control
-        JButton b = new JButton("Delete Appointment"); 
+        JButton b = new JButton("Delete Appointment");
         b.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -410,13 +438,12 @@ public class PanelAction {
         p.add(pn); // labels
         p.add(table); // appointments table 
         p.add(pn2); // delete appointment button 
-        return p; 
+        return p;
     }
 
-    /** 
-     * only for admin  
-     * shows the options for admin user
-     * 
+    /**
+     * only for admin shows the options for admin user
+     *
      * @return
      */
     public JPanel Admin() {

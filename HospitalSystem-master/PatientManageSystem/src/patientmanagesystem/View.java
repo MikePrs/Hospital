@@ -45,8 +45,7 @@ public class View extends JFrame {
     }
 
     /**
-     * main frame that contains side , menu bar 
-     * and main panel
+     * main frame that contains side , menu bar and main panel
      *
      * @param db
      */
@@ -202,9 +201,9 @@ public class View extends JFrame {
         );
     }
 
-    /** 
-     * login patients form 
-     *  
+    /**
+     * login patients form
+     *
      */
     public void LoginP() {
         JLabel l1, l2, l3, l4;
@@ -216,7 +215,7 @@ public class View extends JFrame {
         l1.setForeground(Color.blue);
         l1.setFont(new Font("Serif", Font.BOLD, 20)); // labels 
 
-        l2 = new JLabel("Name"); 
+        l2 = new JLabel("Name");
         l3 = new JLabel("Password");
         tf1 = new JTextField();
         p1 = new JPasswordField();
@@ -251,6 +250,14 @@ public class View extends JFrame {
                                 + "\n date of your last enter in this hospital and exit \n"
                                 + rs.getString("enterP")
                                 + " -- " + rs.getString("exitP"));
+
+                        int option = JOptionPane.OK_CANCEL_OPTION;
+                        if (option == 2) {
+                            p.removeAll();
+                            p.revalidate();
+                            p.repaint();
+                            p.add(ac.HomePage());
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(null, "username and password do not matched");
@@ -327,7 +334,8 @@ public class View extends JFrame {
         p.add(btn1);
     }
 
-    /** login doctors form 
+    /**
+     * login doctors form
      *
      */
     public void LoginD() {
@@ -374,6 +382,14 @@ public class View extends JFrame {
                                 + "\n start date \n"
                                 + rs.getString("startDate")
                                 + " \n your specialty : " + rs.getString("specialty"));
+
+                        int option = JOptionPane.OK_CANCEL_OPTION;
+                        if (option == 2) {
+                            p.removeAll();
+                            p.revalidate();
+                            p.repaint();
+                            p.add(ac.HomePage());
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "username and password do not matched");
                     }
